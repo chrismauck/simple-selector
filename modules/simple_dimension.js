@@ -1,4 +1,6 @@
-/*! Simple Selector (simple_dimension.js) | GNU AGPL-3.0 License | https://github.com/chrismauck/simple-selector/ */
+/*! Simple Selector (simple_dimension.js) | GNU GPLv3 License | Copyright (c) 2019 Chris Mauck
+    Source: https://github.com/chrismauck/simple-selector/
+*/
 
 ['width','height'].forEach(( n, i ) => {
 /** .width() and .height() Get or Set width or height on referenced selector object.

@@ -1,4 +1,6 @@
-/*! Simple Selector (simple_attributes.js) | GNU AGPL-3.0 License | https://github.com/chrismauck/simple-selector/ */
+/*! Simple Selector (simple_attributes.js) | GNU GPLv3 License | Copyright (c) 2019 Chris Mauck
+    Source: https://github.com/chrismauck/simple-selector/
+*/
 
 /** .attr(n, v)
  * Element attribute getter and setter

@@ -1,4 +1,6 @@
-/*! Simple Selector (simple_pinch.js) | GNU AGPL-3.0 License | https://github.com/chrismauck/simple-selector/ */
+/*! Simple Selector (simple_pinch.js) | GNU GPLv3 License | Copyright (c) 2019 Chris Mauck
+    Source: https://github.com/chrismauck/simple-selector/
+*/
 
 /** .pinch()
  * @param {object=} opt  optional user defined settings to replace defaults
