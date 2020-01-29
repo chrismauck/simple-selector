@@ -4,12 +4,12 @@ let $ = window.$ || null;
 !function (b, c, d, f) {
     'use strict';
     function _el(e) { c.push.apply(this, e && e.nodeType ? [e] : '' + e === e ? b.querySelectorAll(e) : f) }
-    function camel(s) { return s.replace(/-+(.)?/g, char => char ? char.toUpperCase() : ''); }
-    $ = function (e) { return (typeof e==='function') ? /c/.test(b.readyState) ? e() : $(b).on('DOMContentLoaded', e) : new _el(e) }
+    const camel = (s) => { return s.replace(/-+(.)?/g, char => char ? char.toUpperCase() : ''); }
+    $ = (e) => { return (typeof e==='function') ? /c/.test(b.readyState) ? e() : $(b).on('DOMContentLoaded', e) : new _el(e) }
     $[d] = _el[d] = $.fn = _el.fn = {
         length: 0,
-        on: function (e, b) { return this.each(function (c) { c.addEventListener(e, b); }) },
-        off: function (e, b) { return this.each(function (c) { c.removeEventListener(e, b); }) },
+        on: function (e, b) { return this.each( c => { c.addEventListener(e, b); }) },
+        off: function (e, b) { return this.each( c => { c.removeEventListener(e, b); }) },
         each: function (e, b) { c.forEach.call(this, e, b); return this; },
         one: function(e, b) {
             this.each( function(c) {
@@ -20,7 +20,7 @@ let $ = window.$ || null;
         first: function() { return $(this[0]); },
         last: function() { return $(this[this.length - 1]); },
         eq: function(i) { return $(this[i]); },
-        children: function(e) { var a = this[0].map( x => x.queryAll(e)); return [].concat(...a);},
+        children: function(e) { let a = this[0].map( x => x.queryAll(e)); return [].concat(...a);},
         // DOM modification
         append: function(e) { return this.each( c => { c.append(e.cloneNode(true)), e.remove() }); },
         prepend: function(e) { return this.each( c => { c.prepend(e.cloneNode(true)), e.remove() }); },
@@ -38,7 +38,7 @@ let $ = window.$ || null;
         // class
         hasClass: function(e) { return this[0].classList.contains(e); },
         data: function(k, v) {
-            if (typeof k === 'string' && v === []._) { var el = this.nodeType ? this : this[0]; return el && 'dataset' in el ? el['dataset'][camel(k)] : undefined; } return this.each( el => { el['dataset'][camel(k)] = v; }); },
+            if (typeof k === 'string' && v === []._) { let el = this.nodeType ? this : this[0]; return el && 'dataset' in el ? el['dataset'][camel(k)] : undefined; } return this.each( el => { el['dataset'][camel(k)] = v; }); },
         // visibility
         hide: function() { return this.each( e => { e.style.display = 'none'; }); },
         show: function() { return this.each( e => { e.style.display = 'block'; }); },
@@ -46,21 +46,21 @@ let $ = window.$ || null;
         toggle: function() { return this.each( e => { e.style.display = e.style.display === 'block' ? 'none' : 'block'; }); },
         position: function() { return { top: this[0].offsetTop, left: this[0].offsetLeft }; },
         offset: function() { 
-            var r = this[0].getBoundingClientRect(), db = document.body;
+            let r = this[0].getBoundingClientRect(), db = document.body;
             return { top: r.top + db.scrollTop, left: r.left + db.scrollLeft }; },
-        pos: function() { return { 'x': window.scrollX, 'y': window.scrollY }; },
+        pos: () => { return { 'x': window.scrollX, 'y': window.scrollY }; },
         sort: c.sort,
         splice: c.splice
     };
     const props = ['addClass', 'removeClass', 'toggleClass'], maps = ['add', 'remove', 'toggle'];
-    props.forEach(function(p, i) { $.fn[p] = function(e) { return this.each( b => { b.classList[maps[i]](e); }); }; });
-    ['width','height'].forEach(function( n, i ) {
+    props.forEach((p, i) => { $.fn[p] = function(e) { return this.each( b => { b.classList[maps[i]](e); }); }; });
+    ['width','height'].forEach(( n, i ) => {
         $.fn[n] = function(c) {
             return (typeof c === 'number') ? this[0].style[n] = c+'px' : (typeof c === typeof true) ? this[0]['offset'+cap(n)] : parseInt(getComputedStyle(this[0], null)[n]);
         };
     });
     const evt = ['blur','focus','focusin','focusout','resize','scroll','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','contextmenu'];
-    evt.forEach(function( n, i ) { $.fn[n] = function(cb) { return this.on(n, cb); }; });
+    evt.forEach(( n, i ) => { $.fn[n] = function(cb) { return this.on(n, cb); }; });
 }(document, [], 'prototype');
 
 /** .fadeOut()
@@ -68,11 +68,11 @@ let $ = window.$ || null;
  * @param {method} fn   optional - callback function
  */
 $.fn.fadeOut = function(d=400, fn) {
-    var tick = 0, frm = 16.5, dur;
+    let tick = 0, frm = 16.5, dur;
     if (typeof d !== 'function') { dur = frm / parseInt(d, 10); } else { dur = (frm/400); fn = d; }
     return this.each( e => {
         e.style.opacity = 1;
-        function run() {
+        run = () => {
             e.style.opacity -= dur;
             if (e.style.opacity < 0) { tick = 1, e.style.opacity = 0, e.style.display = 'none', (typeof fn ==='function') ? fn.apply() : ''; }
             if (!tick) requestAnimationFrame(run);
@@ -86,12 +86,12 @@ $.fn.fadeOut = function(d=400, fn) {
  * @param {method} fn   optional - callback function
  */
 $.fn.fadeIn = function(d=400, fn) {
-    var tick = 0, frm = 16.5, dur;
+    let tick = 0, frm = 16.5, dur;
     if (typeof d !== 'function') { dur = frm / parseInt(d, 10); } else { dur = (frm/400); fn = d; }
     return this.each( e => {
         e.style.opacity = 0;
         e.style.display = '';
-        function run() {
+        run = () => {
             e.style.opacity =+ parseFloat(e.style.opacity) + dur;
             if (e.style.opacity > 1) { tick = 1; e.style.opacity = 1; (typeof fn ==='function') ? fn.apply() : ''; }
             if (!tick) requestAnimationFrame(run);
@@ -101,7 +101,7 @@ $.fn.fadeIn = function(d=400, fn) {
 };
 
 // $.fn.fadeTo = function(d=400, o=0, fn) {
-//     var tick = 0, dur, co = this.style.opacity;
+//     let tick = 0, dur, co = this.style.opacity;
 //     if (typeof d !== 'function') { dur = frm / parseInt(d, 10); } else { dur = (frm/400); fn = d; }
 //     return this.each( e => {
 //         (co===1) ? e.style.opacity = 1 : e.style.opacity = 0, e.style.display = '';
@@ -125,9 +125,9 @@ $.fn.fadeIn = function(d=400, fn) {
  * Returns object with 'direction', 'distance' and 'duration'
  */
 $.fn.swipe = function( opts, cb ) {
-    var isTouch = 'ontouchstart' in window;
-    var xDown, yDown, xUp, yUp, xDiff, yDiff, timeDown, startEl, finalEl;
-    var starts={}, ends={},
+    let isTouch = 'ontouchstart' in window;
+    let xDown, yDown, xUp, yUp, xDiff, yDiff, timeDown, startEl, finalEl;
+    let starts={}, ends={},
         options = {
             threshold: opts.threshold || 100,
             timeout: opts.timeout || 1000,
@@ -139,12 +139,12 @@ $.fn.swipe = function( opts, cb ) {
             move: isTouch ? 'touchmove' : 'mousemove',
             end: isTouch ? 'touchend' : 'mouseup'
         };
-    var $el = this;
+    let $el = this;
 
     // Event Methods
     const handleTouchEnd = (e) => {
         // e.stopPropagation();
-        var same = false, destEl=null;
+        let same = false, destEl=null;
         finalEl = document.elementFromPoint(xUp, yUp);
         if (finalEl===e.target || finalEl.parentNode===e.target) {
             same = true;
@@ -152,7 +152,7 @@ $.fn.swipe = function( opts, cb ) {
         }
         if (options.strict && destEl !== e.target) return;
 
-        var timeDiff = Date.now() - timeDown, eventResults = {};
+        let timeDiff = Date.now() - timeDown, eventResults = {};
 
         if (validateSwipeDistance() && timeDiff < options.timeout) {
             eventResults.direction = calculateDirection(starts, ends);
@@ -167,7 +167,7 @@ $.fn.swipe = function( opts, cb ) {
     }
     const handleTouchStart = (e) => {
         if (e.target.getAttribute(options.ignore) === 'true') return;
-        var ev = (e.touches === []._) ? e : e.touches[0];
+        let ev = (e.touches === []._) ? e : e.touches[0];
         startEl = e.target;
         timeDown = Date.now();
         xDown = starts.x = ev.clientX;
@@ -176,7 +176,7 @@ $.fn.swipe = function( opts, cb ) {
     }
     const handleTouchMove = (e) => {
         if (!xDown || !yDown) return;
-        var ev = (e.touches === []._) ? e : e.touches[0];
+        let ev = (e.touches === []._) ? e : e.touches[0];
         xUp = ends.x = ev.clientX;
         yUp = ends.y = ev.clientY;
         xDiff = xDown - xUp;
@@ -185,7 +185,7 @@ $.fn.swipe = function( opts, cb ) {
 
     // Utility Methods
     const validateSwipeDistance = () => {
-        var valid = !0;
+        let valid = !0;
         return null !== options.threshold && (valid = (Math.abs(xDiff) > options.threshold || Math.abs(yDiff) > options.threshold)), valid
     }
     const calculateAngle = (startPoint, endPoint) => {
