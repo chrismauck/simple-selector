@@ -8,4 +8,4 @@
  */
 $.fn.hasClass = function(e) { return this[0].classList.contains(e); };
 const props = ['addClass', 'removeClass', 'toggleClass'], maps = ['add', 'remove', 'toggle'];
-props.forEach(function(p, i) { $.fn[p] = function(e) { return this.each( b => { b.classList[maps[i]](e); }); }; });
+props.forEach((p, i) => { $.fn[p] = function(e) { return this.each( b => { b.classList[maps[i]](e); }); }; });

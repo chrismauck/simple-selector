@@ -1,6 +1,6 @@
 /*! Simple Selector (simple_dimension.js) | GNU AGPL-3.0 License | https://github.com/chrismauck/simple-selector/ */
 
-['width','height'].forEach(function( n, i ) {
+['width','height'].forEach(( n, i ) => {
 /** .width() and .height() Get or Set width or height on referenced selector object.
  * @param {*} c (null||bool||int)
  * - .width(null||bool||int)     null = get width, true = get outerWidth, int = set width in px

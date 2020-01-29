@@ -7,11 +7,11 @@
  */
 
 $.fn.pinch = function( opt, cb ) {
-    var $el = this;
-    var isTouch = 'ontouchstart' in window;
-    var PROPS_CLIENT_XY = ['clientX', 'clientY'];
-    var theStart, theEnd, timeDown, isGest = 'ongesturestart' in window;
-    var t = {
+    let $el = this;
+    let isTouch = 'ontouchstart' in window;
+    let PROPS_CLIENT_XY = ['clientX', 'clientY'];
+    let theStart, theEnd, timeDown, isGest = 'ongesturestart' in window;
+    let t = {
         start: isGest ? 'gesturestart' : 'touchstart',
         move: isGest ? 'gesturechange' : 'touchmove',
         end: isGest ? 'gestureend' : 'touchend'
@@ -25,7 +25,7 @@ $.fn.pinch = function( opt, cb ) {
         if (!isTouch) return;
         e.preventDefault();
         e.stopPropagation();
-        var ev = (e.touches === []._) ? e : e.touches;
+        let ev = (e.touches === []._) ? e : e.touches;
         timeDown = Date.now();
         theStart = ev;
     };
@@ -33,7 +33,7 @@ $.fn.pinch = function( opt, cb ) {
     const handleGChange = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        var ev = (e.touches === []._) ? e : e.touches;
+        let ev = (e.touches === []._) ? e : e.touches;
         theEnd = ev;
     };
 
@@ -44,8 +44,8 @@ $.fn.pinch = function( opt, cb ) {
             e.scale = getScale(theStart, theEnd);
         }
 
-        var timeDiff = Date.now() - timeDown;
-        var eventResults = {};
+        let timeDiff = Date.now() - timeDown;
+        let eventResults = {};
         if (e.scale !== 1 && timeDiff < options.timeout) {
             eventResults.scale = e.scale.toFixed(1);
             eventResults.zoom = (e.scale < 1) ? "out" : (e.scale > 1) ? "in" : "none";
@@ -61,7 +61,7 @@ $.fn.pinch = function( opt, cb ) {
 
     const getDistance = (p1, p2, props) => {
         if (!props) { props = ['x', 'y']; }
-        var x = p2[props[0]] - p1[props[0]], y = p2[props[1]] - p1[props[1]];
+        let x = p2[props[0]] - p1[props[0]], y = p2[props[1]] - p1[props[1]];
         return Math.sqrt(x * x + y * y);
     }
 

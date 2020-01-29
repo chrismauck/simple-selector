@@ -55,6 +55,6 @@ $.fn.eq = function(i) {
  * - Usage: $(selector).children('div')
  */
 $.fn.children = function(e) {
-    var a = this[0].map( x => x.queryAll(e));
+    let a = this[0].map( x => x.queryAll(e));
     return [].concat(...a);
 }

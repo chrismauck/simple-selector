@@ -14,7 +14,7 @@ $.fn.one = function(e, ev) {
 
 /* EVENT methods/ listener pass throughs */
 const evt = ['blur','focus','focusin','focusout','resize','scroll','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','contextmenu'];
-evt.forEach(function( n, i ) {
+evt.forEach(( n, i ) => {
 /** evt[n](cb)
  * Methods defined in evt[], utilized like .click(cb), .keydown(cb), etc. where cb = callback function.
  * @param {string} cb   Method to fire on event

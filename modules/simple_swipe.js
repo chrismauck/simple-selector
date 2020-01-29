@@ -6,9 +6,9 @@
  * Returns object with 'direction', 'distance' and 'duration'
  */
 $.fn.swipe = function( opts, cb ) {
-    var isTouch = 'ontouchstart' in window;
-    var xDown, yDown, xUp, yUp, xDiff, yDiff, timeDown, startEl, finalEl;
-    var starts={}, ends={},
+    let isTouch = 'ontouchstart' in window;
+    let xDown, yDown, xUp, yUp, xDiff, yDiff, timeDown, startEl, finalEl;
+    let starts={}, ends={},
         options = {
             threshold: opts.threshold || 100,
             timeout: opts.timeout || 1000,
@@ -20,12 +20,12 @@ $.fn.swipe = function( opts, cb ) {
             move: isTouch ? 'touchmove' : 'mousemove',
             end: isTouch ? 'touchend' : 'mouseup'
         };
-    var $el = this;
+        let $el = this;
 
     // Event Methods
     const handleTouchEnd = (e) => {
         // e.stopPropagation();
-        var same = false, destEl=null;
+        let same = false, destEl=null;
         finalEl = document.elementFromPoint(xUp, yUp);
         if (finalEl===e.target || finalEl.parentNode===e.target) {
             same = true;
@@ -33,7 +33,7 @@ $.fn.swipe = function( opts, cb ) {
         }
         if (options.strict && destEl !== e.target) return;
 
-        var timeDiff = Date.now() - timeDown, eventResults = {};
+        let timeDiff = Date.now() - timeDown, eventResults = {};
 
         if (validateSwipeDistance() && timeDiff < options.timeout) {
             eventResults.direction = calculateDirection(starts, ends);
@@ -48,7 +48,7 @@ $.fn.swipe = function( opts, cb ) {
     }
     const handleTouchStart = (e) => {
         if (e.target.getAttribute(options.ignore) === 'true') return;
-        var ev = (e.touches === []._) ? e : e.touches[0];
+        let ev = (e.touches === []._) ? e : e.touches[0];
         startEl = e.target;
         timeDown = Date.now();
         xDown = starts.x = ev.clientX;
@@ -57,7 +57,7 @@ $.fn.swipe = function( opts, cb ) {
     }
     const handleTouchMove = (e) => {
         if (!xDown || !yDown) return;
-        var ev = (e.touches === []._) ? e : e.touches[0];
+        let ev = (e.touches === []._) ? e : e.touches[0];
         xUp = ends.x = ev.clientX;
         yUp = ends.y = ev.clientY;
         xDiff = xDown - xUp;
@@ -66,7 +66,7 @@ $.fn.swipe = function( opts, cb ) {
 
     // Utility Methods
     const validateSwipeDistance = () => {
-        var valid = !0;
+        let valid = !0;
         return null !== options.threshold && (valid = (Math.abs(xDiff) > options.threshold || Math.abs(yDiff) > options.threshold)), valid
     }
     const calculateAngle = (startPoint, endPoint) => {

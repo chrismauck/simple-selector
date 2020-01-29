@@ -32,7 +32,7 @@ $.fn.removeAttr = function (n) {
  * @param {string} v    Optional value, if included will apply value to named attribute
  * Usage: get - $(selector).data('category'), set - $(selector).data('category', 'Supplies')
  */
-function camel(s) { return s.replace(/-+(.)?/g, char => char ? char.toUpperCase() : ''); }
+const camel = (s) => { return s.replace(/-+(.)?/g, char => char ? char.toUpperCase() : ''); }
 $.fn.data = function(n, v) {
     if (typeof n === 'string' && v === []._) {
         var el = this.nodeType ? this : this[0];

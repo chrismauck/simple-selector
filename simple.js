@@ -72,7 +72,7 @@ $.fn.fadeOut = function(d=400, fn) {
     if (typeof d !== 'function') { dur = frm / parseInt(d, 10); } else { dur = (frm/400); fn = d; }
     return this.each( e => {
         e.style.opacity = 1;
-        run = () => {
+        const run = () => {
             e.style.opacity -= dur;
             if (e.style.opacity < 0) { tick = 1, e.style.opacity = 0, e.style.display = 'none', (typeof fn ==='function') ? fn.apply() : ''; }
             if (!tick) requestAnimationFrame(run);
@@ -91,7 +91,7 @@ $.fn.fadeIn = function(d=400, fn) {
     return this.each( e => {
         e.style.opacity = 0;
         e.style.display = '';
-        run = () => {
+        const run = () => {
             e.style.opacity =+ parseFloat(e.style.opacity) + dur;
             if (e.style.opacity > 1) { tick = 1; e.style.opacity = 1; (typeof fn ==='function') ? fn.apply() : ''; }
             if (!tick) requestAnimationFrame(run);
