@@ -83,7 +83,6 @@ Example usage:
     $(selector).data('category', 'Supplies');
 
 ---
-
 ---
 ### simple_class.js
 
@@ -142,7 +141,6 @@ Example usage:
     $(selector).toggleClass('active');
 
 ---
-
 ---
 ### simple_dimension.js
 
@@ -181,7 +179,6 @@ Example usage:
     $(selector).height(500);
 
 ---
-
 ---
 ### simple_display.js
 
@@ -274,7 +271,6 @@ Example Usage:
     });
 
 ---
-
 ---
 ### simple_dom_mods.js
 
@@ -376,7 +372,6 @@ Example Usage:
     $(selector).children('div');
 
 ---
-
 ---
 ### simple_listeners.js
 Additional event listeners on top of the default on() and off()
@@ -416,7 +411,6 @@ Example Usage:
     });
 
 ---
-
 ---
 ### simple_pinch.js
 Additional method for simple pinch in and out events.
@@ -441,7 +435,6 @@ Example Usage:
     });
 
 ---
-
 ---
 ### simple_position.js
 
@@ -492,7 +485,79 @@ Simply returns an object containing x and y scroll position.
      var scroll = $(selector).pos().y
 
 ---
+---
+### simple_scrollto.js
 
+Additional method for the addition of smooth scrollTo functionality.
+
+---
+**.scrollTo()**
+
+Method to allow for smooth scrolling when clicking on a link. Allows for a callback method and optional configuration settings.
+
+    /** .scrollTo()
+    * @param  {*}  trg optional user defined settings to replace defaults options are
+    * - {object} object can define 'offset', 'target' and 'callback
+    * - {callback} pass a callback method directly
+    * - {string} solely define the target element ID
+    */
+
+Example usage:
+
+   Assuming that there is a link in the body of your page with a class of 'scroll'.
+    
+    <a href="#CTA" class="scroll">Call to Action</a> 
+    
+    $('.scroll).on('click', function() {
+	    $(this).scrollTo();
+	    // by default, the href value will be used as the target
+	});
+	
+Assuming that you are clicking on a `div` that wouldn't have an *href* attribute associated with it. Simply use `data-target="YOUR_TARGET_ID"`
+	
+	<div class="scroll" data-target="#CTA">Call to Action</div>
+	
+	$('.scroll).on('click', function() {
+	    $(this).scrollTo();
+	    // by default, if no href value data-target will be used as the target
+	});
+
+***parameters***
+
+**.scrollTo( object );**
+You can insert a custom object to set specific properties of scrollTo
+    
+    $('.item').on('click', function() {
+	    $(this).scrollTo({
+		    'target'  : '#enroll_now',
+		    'offset'  : 100,
+		    'callback': () => {
+			    console.log("scrolled!");
+			}
+		});
+    });
+
+**target** is of type `{string}` and must be preceded by a '#'
+**offset** is of type `{number}`, the larger the value, the further from the top the scroll will conclude
+**callback** is a `{method}` to run when scrolling is complete
+
+**.scrollTo( method );**
+You can insert a callback method to run after the default scrolling completes.
+
+    $('.item').on('click', function() {
+        $(this).scrollTo(() => {
+		    console.log("scrolled!");
+    	});
+    });
+
+**.scrollTo( string );**
+You can specify a string to use as the target ID of your scrollTo. Simply precede the string with a '#'. This will override any other targets that may be associated with the link; including `href` or `data-target`.
+
+     $('.item').on('click', function() {
+        $(this).scrollTo('#enroll_now');
+    });
+
+---
 ---
 ### simple_swipe.js
 
@@ -516,9 +581,7 @@ Example Usage:
         var msg = "swiped: " + res.direction + ", distance: "+ res.distance +"px, duration: " + res.duration + "ms";
         $(selector).html(msg);
     });
-
 ---
-
 ---
 
 ### simple_values.js
@@ -598,3 +661,4 @@ Example Usage:
     $(input selector).val();
     // Set the value of the referenced input selector object
     $(input selector).val('Foo');
+

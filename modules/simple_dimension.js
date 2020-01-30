@@ -12,4 +12,4 @@
         return (typeof c === 'number') ? this[0].style[n] = c+'px' : (typeof c === typeof true) ? this[0]['offset'+cap(n)] : parseInt(getComputedStyle(this[0], null)[n]);
     };
 });
-cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);

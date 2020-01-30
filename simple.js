@@ -207,4 +207,29 @@ $.fn.swipe = function( opts, cb ) {
     $el.on(t.end, (e) => { handleTouchEnd(e); });
 };
 
-cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+/** .scrollTo()
+ * @param {*} a   optional user defined settings to replace defaults options are
+ * -    {object}    object can define 'offset', 'target' and 'callback
+ * -    {callback}  pass a callback method directly
+ * -    {string}    solely define the target element ID
+ */
+$.fn.scrollTo = function (a = null) {
+    let t, fn, w = window, o = 0;
+    return isObj(a) ? (o = a.offset || 0, t = a.target || null, fn = a.callback || null) : isFunc(a) ? fn = a : !isFunc(a) && !isObj(a) && (t = a),
+        this.each(e => {
+            const _top = e => Math.floor($(e).offset().top - o),
+                _trgt = t ? t : $(e).attr('href') && 1 < $(e).attr('href').length ? $(e).attr('href') : $(e).data('target'),
+                _dest = document.querySelector(_trgt);
+            if (!_dest) return;
+            w.scrollBy({ top: _top(_dest), left: 0, behavior: 'smooth' });
+            let i = setInterval(() => {
+                let _bottom = w.innerHeight + w.pageYOffset >= document.body.offsetHeight - 2;
+                (0 === _top(_dest) || _bottom) && (w.history.pushState('', '', _trgt), 'function' == typeof fn ? fn.apply() : '', clearInterval(i))
+            }, 100)
+        });
+};
+
+const isFunc = f => f && {}.toString.call(f) === '[object Function]';
+const isObj = o => o && {}.toString.call(o) === '[object Object]';
+
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
