@@ -7,7 +7,43 @@
     <meta name="author" content="https://github.com/chrismauck" />
     <title>Simple Selector</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+            outline: none;
+            box-sizing: border-box
+        }
 
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%
+        }
+        body {
+            font-size: 14px;
+            font-family: sans-serif;
+            color: #666666;
+            width: 100%;
+            height: 100vh;
+            /* position: fixed;
+            overflow: hidden;             */
+            -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                        user-select: none;
+        }
+        #container {
+            position: absolute; display: block;
+            width: 100%; height: auto; min-height: 100%;
+            background: #e5e5e5;
+        }
+        section {
+            position: relative;
+            display: block;
+            padding: 2rem;
+            width: 100%;
+            height: 500px;
+        }
     </style>
 </head>
 
@@ -15,11 +51,57 @@
 
     <div id="container">
 
+        <section id="first">
+            <h1>Section One</h1>
+            <p><a href="#second" class="scroll">Second</a></p>
+            <p><a href="#third" class="scroll">Third</a></p>
+            <p><a href="" data-target="#fourth" class="scroll">Fourth</a></p>
+        </section>
+
+        <section id="second">
+            <h1>Section Two</h1>
+        </section>
+
+        <section id="third">
+            <h1>Section Three</h1>
+        </section>
+
+        <section id="fourth">
+            <h1>Section Four</h1>
+        </section>
+
+        <section id="fifth" data-target="#second" class="scroll">
+            <h1>Section Five</h1>
+        </section>
+
     </div>
     <script src="simple.js"></script>
     <script>
         (function () {
 
+            $('.scroll').on('click', function(e) {
+                e.preventDefault();
+                // $(this).scrollTo('#third');
+                $(this).scrollTo({
+                    'offset': 68,
+                    'callback': () => {
+                        console.log("done");
+                    }
+                });
+            });
+            $('h1').on('click', function() {
+                // console.log($(this).width());
+                $(this).fadeOut(1000, () => {
+                    $(this).fadeIn(1000);
+                    console.log($(this).pos());
+                });
+            });
+
+            // $('h1').swipe(function(results){
+            //     var msg = "swiped: " + results.direction + "<br><small>distance: "+ results.distance +"px duration: " + results.duration + "ms</small>"
+            //     $('#swipeBlock').html(msg);
+            //     console.log(msg);
+            // });
             // custom scripts here
 
         })();
