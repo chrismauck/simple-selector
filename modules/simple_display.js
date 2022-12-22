@@ -51,7 +51,7 @@ $.fn.fadeOut = function(d=400, fn) {
     });
 };
 
-/** .fadeIn() Unsets display property then increases the opacity over time on referenced selector object.
+/** .fadeIn() Unset display property then increases the opacity over time on referenced selector object.
  * @param {integer} d   optional - duration of transition, default is 400
  * @param {method} fn   optional - callback function
  */

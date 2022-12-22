@@ -2,7 +2,7 @@
     Source: https://github.com/chrismauck/simple-selector/
 */
 
-/** Class Managment
+/** Class Management
  * .hasClass('name')
  * .addClass('name')
  * .removeClass('name')

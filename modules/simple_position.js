@@ -2,7 +2,7 @@
     Source: https://github.com/chrismauck/simple-selector/
 */
 
-/* Position Managment */
+/* Position Management */
 
 /** .position()
  * Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.

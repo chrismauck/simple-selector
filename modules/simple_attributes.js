@@ -4,7 +4,7 @@
 
 /** .attr(n, v)
  * Element attribute getter and setter
- * @param {string} n    Attribute name, if v ommitted will return value
+ * @param {string} n    Attribute name, if v omitted will return value
  * @param {string} v    Optional value, if included will apply value to named attribute
  * Usage: get - $(selector).attr('title'), set - $(selector).attr('title', 'New Title')
  */
@@ -30,7 +30,7 @@ $.fn.removeAttr = function (n) {
 
 /** .data(n, v)
  * Data attribute getter and setter
- * @param {string} n    Attribute name, if v ommitted will return value
+ * @param {string} n    Attribute name, if v omitted will return value
  * @param {string} v    Optional value, if included will apply value to named attribute
  * Usage: get - $(selector).data('category'), set - $(selector).data('category', 'Supplies')
  */
@@ -38,7 +38,7 @@ const camel = (s) => { return s.replace(/-+(.)?/g, char => char ? char.toUpperCa
 $.fn.data = function(n, v) {
     if (typeof n === 'string' && v === []._) {
         var el = this.nodeType ? this : this[0];
-        return el && 'dataset' in el ? el['dataset'][camel(n)] : undefined;
+        return el && 'dataset' in el ? el['dataset'][camel(n)] : []._;
     }
     return this.each( el => { el['dataset'][camel(n)] = v; });
 };

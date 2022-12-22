@@ -25,7 +25,7 @@ Get or set the value of an attribute associated with an selector object.
 
     /** .attr(n, v)
     * Element attribute getter and setter
-    * @param  {string}  n Attribute name, if v ommitted will return value
+    * @param  {string}  n Attribute name, if v omitted will return value
     * @param  {string=}  v Optional value, if included will apply value to named attribute
     */
 
@@ -256,7 +256,7 @@ Example Usage:
 ---
 **.fadeIn()**
 
-Unsets display property then increases the opacity over time on referenced selector object.
+Unset display property then increases the opacity over time on referenced selector object.
 
     /** .fadeIn(d, fn) 
     * @param {integer=} d  optional - duration of transition, default is 400
@@ -594,7 +594,7 @@ Text, HTML and Val getter and setters along with empty() and remove() methods
 Text content getter and setter
 
     /** .text(t)
-    * @param {string} t    Optional text value to set, if ommitted will return value
+    * @param {string} t    Optional text value to set, if omitted will return value
     */
 
 Example Usage:
@@ -610,7 +610,7 @@ Example Usage:
 HTML content getter and setter
 
     /** .html(h)
-    * @param {string} h    Optional HTML or Text value to set, if ommitted will return value
+    * @param {string} h    Optional HTML or Text value to set, if omitted will return value
     */
 
 Example Usage:
@@ -652,7 +652,7 @@ Example Usage:
 Input value getter and setter
 
     /** .val(v)
-    * @param {*} v    Optional value to set, if ommitted will return current value
+    * @param {*} v    Optional value to set, if omitted will return current value
     */
 
 Example Usage:
